@@ -9,11 +9,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \usepackage{graphicx}	
-\usepackage{booktabs}			 % for much better looking tables
-\usepackage{array} 			% for better arrays (eg matrices) in maths
-\usepackage{paralist}			 % very flexible & customisable lists (eg. enumerate/itemize, etc.)
-\usepackage{verbatim}			% adds environment for commenting out blocks of text & for better verbatim
-\usepackage{subfig} 			% make it possible to include more than one captioned figure/table in a single float
+\usepackage{booktabs}				 % for much better looking tables
+\usepackage{array} 				% for better arrays (eg matrices) in maths
+\usepackage{paralist}				 % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim}				% adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} 				% make it possible to include more than one captioned figure/table in a single float
+\usepackage{hyperref}
+
 
 %OPTIONAL PACKAGES
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
@@ -52,6 +54,9 @@
 
 
 
+%============= TITLE AND AUTHOR ==================%
+
+
 \title{Master Thesis Title}
 \author{The Author\\
 	Dept of LaTex\\
@@ -62,29 +67,53 @@
 \date{\today} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
 
+
+%============= INDICES AND GLOSSARIES ==================%
+
+\usepackage[style=long,nonumberlist,toc,xindy,acronym,nomain]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
+%\loadglsentries[main]{glossary}
+% or using \input:
+\include{glossary}
+\makeglossaries
+\usepackage[xindy]{imakeidx}
+\makeindex
+
+
+
+
 \begin{document}
 \maketitle
 \tableofcontents
 \newpage
 
 
-\chapter{Introduction}
+\chapter[Chapter Name]{Introduction}
 
-\section[TOC Name]{First Section}
+\section[Section Name]{First Section}
 
-Your text goes here.
+Your text goes here. \index{text here} Your text goes here. Your text goes here. Your text goes here.
 
-\subsection{A subsection}
+\subsection[Subsection Name]{A subsection}
 
-More text.
+More text. More text. More text. \index{more here} More text. More text. More text. More text. More text. More text. 
 
+
+
+
+
+%\appendix
+%\section{First Appendix}
+%Some Appendix Text. \index{Appendix} Some Appendix Text. Some Appendix Text.
 
 {Bibliography}
-\bibliographystyle{unsrt}
-\bibliography{my_bib_file}
+\bibliographystyle{plainnat}
+\bibliography{literature.bib}
 
 
-\appendix
-\section{First Appendix}
+\clearpage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+\printglossary[title=List of Terms,toctitle=Terms and abbreviations]
+%\printglossaries
 
 \end{document}

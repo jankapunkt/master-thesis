@@ -7,7 +7,7 @@
 *.toc
 *.lof
 *.lot
-*.pdf
+
 
 # bibliography related
 *-blx.bib
@@ -23,7 +23,9 @@ glossary.ist
 *.acr
 *.alg
 *.glg
-*.gls
+*.gls*
+.idx
+.xdy
 
 # backup files
 *~

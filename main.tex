@@ -4,22 +4,33 @@
 \documentclass[11pt,titlepage,twoside,openright]{report}
 
 
-%PACKAGES IMPORT
+%============================================================================%
+%
+%	PACKAGES IMPORT AND DEFINITIONS
+%
+%============================================================================%
 
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+%---------------- FONT PACKAGES ------------------------%
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+%---------------- Graphics PACKAGES ------------------------%
 \usepackage{geometry}
-\usepackage{graphicx}	
+\usepackage{graphicx} % Required for including pictures
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+
+
+
+
 \usepackage{booktabs}				 % for much better looking tables
 \usepackage{array} 				% for better arrays (eg matrices) in maths
 \usepackage{paralist}				 % very flexible & customisable lists (eg. enumerate/itemize, etc.)
 \usepackage{verbatim}				% adds environment for commenting out blocks of text & for better verbatim
-\usepackage{subfig} 				% make it possible to include more than one captioned figure/table in a single float
-\usepackage{hyperref}
-
-
-%OPTIONAL PACKAGES
-% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
-
 
  
 \geometry{a4paper}			%define A4 Paper
@@ -47,28 +58,39 @@
 
 
 
-%============= RENEW COMMANDS ==================%
 
 \renewcommand{\abstractname}{Executive Summary} 		%switches abstract to executive summary
 
 
 
 
-%============= TITLE AND AUTHOR ==================%
+
+%============================================================================%
+%
+%	TITLE AND AUTHOR
+%
+%============================================================================%
 
 
-\title{Master Thesis Title}
-\author{The Author\\
+
+\title{\textbf{The Master Thesis Title}}
+\vspace{50pt} % Some vertical space between the title and author name
+\author{\textsc{The Author}\\
 	Dept of LaTex\\
 	Tex University\\
 	Textown, Texland\\
 	\texttt{mail@texuni.com}}
+\vspace{40pt} % Some vertical space between the title and author name
+\date{\today}
 
-\date{\today} % Activate to display a given date or no date (if empty),
-         % otherwise the current date is printed 
 
 
-%============= INDICES AND GLOSSARIES ==================%
+%============================================================================%
+%
+%	INDEX AND GLOSSARY
+%
+%============================================================================%
+
 
 \usepackage[style=long,nonumberlist,toc,xindy,acronym,nomain]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
 %\loadglsentries[main]{glossary}
@@ -80,6 +102,12 @@
 
 
 
+%============================================================================%
+%
+%	BEGIN DOCUMENT
+%
+%============================================================================%
+
 
 \begin{document}
 \maketitle
@@ -87,33 +115,82 @@
 \newpage
 
 
+\begin{abstract}
+Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
+\end{abstract}
+
+\newpage
+
 \chapter[Chapter Name]{Introduction}
+
+Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
 
 \section[Section Name]{First Section}
 
-Your text goes here. \index{text here} Your text goes here. Your text goes here. Your text goes here.
+Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
+
+\begin{itemize}
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+\end{itemize}
 
 \subsection[Subsection Name]{A subsection}
+
+Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
 
 More text. More text. More text. \index{more here} More text. More text. More text. More text. More text. More text. 
 
 
 
+%============================================================================%
+%
+%	APPENDIX
+%
+%============================================================================%
+
+\cleardoublepage
+\phantomsection %hyperref package support
+\addcontentsline{toc}{chapter}{Appendix}
+{\textbf{\LARGE{Appendix}}}\\ %headline
+
+Some Appendix Text. \index{Appendix} Some Appendix Text. Some Appendix Text.
 
 
-%\appendix
-%\section{First Appendix}
-%Some Appendix Text. \index{Appendix} Some Appendix Text. Some Appendix Text.
+%============================================================================%
+%
+%	BIBLIOGRAPHY
+%
+%============================================================================%
+%useful: https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
 
-{Bibliography}
-\bibliographystyle{plainnat}
+%------------ linking bib to table of content ------------------%
+\cleardoublepage
+\phantomsection %hyperref package support
+\addcontentsline{toc}{chapter}{Bibliography}
+
+%------------ the bibliography ------------------%
+
+{\textbf{\LARGE{Bibliography}}}\\	%headline
+\nocite{*} % Show all Bib-entries (DEBUG)
+%\bibliographystyle{plainnat}
+\bibliographystyle{plain}
 \bibliography{literature.bib}
 
 
-\clearpage
+%============================================================================%
+%
+%	INDEX AND GLOSSARY
+%
+%============================================================================%
+
+\cleardoublepage
+\phantomsection %hyperref package support
 \addcontentsline{toc}{chapter}{Index}
+{\textbf{\LARGE{Index}}}\\ %headline
 \printindex
-\printglossary[title=List of Terms,toctitle=Terms and abbreviations]
-%\printglossaries
+%\printglossary[title=List of Terms,toctitle=Terms and abbreviations]
+\printglossaries
 
 \end{document}

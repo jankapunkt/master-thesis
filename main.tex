@@ -1,56 +1,152 @@
 % !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
 
-\documentclass[11pt,titlepage,twoside,openright]{report}
-
 
 %============================================================================%
 %
-%	PACKAGES IMPORT AND DEFINITIONS
+%	DOCUMENMT DEFINITION
 %
 %============================================================================%
+
+%we use report class for thesis design
+\documentclass[11pt,titlepage,twoside,openright]{report}	
+
+
+%----------------------------------------------------------------------------------------
+%	ENCODING
+%----------------------------------------------------------------------------------------
 
 \usepackage[utf8]{inputenc}
-\usepackage{hyperref}
 
-%---------------- FONT PACKAGES ------------------------%
-\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
-\usepackage{mathpazo} % Use the Palatino font
-\usepackage[T1]{fontenc} % Required for accented characters
-\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+%----------------------------------------------------------------------------------------
+%	COLOR DEFINITIONS
+%----------------------------------------------------------------------------------------
 
-%---------------- Graphics PACKAGES ------------------------%
+\usepackage{color}
+
+%citation reference color
+\definecolor{citationscol}{rgb}{0.1,0.1,0.5}
+
+%urls color
+\definecolor{urlscol}{rgb}{0.4,0.4,0.5}
+
+%internal references color
+\definecolor{linkscol}{rgb}{0.2,0.2,0.3}
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES URLS CITATION STYLES AND SO ON
+%----------------------------------------------------------------------------------------
+
+%apply reference color definitions to hyperref package
+\usepackage[colorlinks=true,citecolor=citationscol,urlcolor=urlscol,linkcolor=linkscol]{hyperref}
+\usepackage{url}
+\urlstyle{same}
+
+
+%----------------------------------------------------------------------------------------
+%	FONT DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% Better typography
+\usepackage[protrusion=true,expansion=true]{microtype} 
+
+ % Use the Palatino font
+\usepackage{mathpazo}
+
+ % Required for accented characters
+\usepackage[T1]{fontenc}
+
+% Change line spacing here, Palatino benefits from a slight increase by default
+\linespread{1.05} 
+
+
+
+%----------------------------------------------------------------------------------------
+%	GEOMETRY  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+%define page styles using geometry
 \usepackage{geometry}
-\usepackage{graphicx} % Required for including pictures
-\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+
+ %define A4 Paper
+\geometry{a4paper}			
+
+% for example, change the margins to 2 inches all round
+\geometry{margin=2.5cm} 	
+
+
+%----------------------------------------------------------------------------------------
+%	GRAPHICS  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% Required for including pictures
+\usepackage{graphicx}
+
+ % make it possible to include more than one captioned figure/table in a single float 
+\usepackage{subfig}
+
+
+ % for much better looking tables
+\usepackage{booktabs}	
+
+% for better arrays (eg matrices) in maths		
+\usepackage{array} 
+
+
+%----------------------------------------------------------------------------------------
+%	ENVIRONMENT  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+
+ % very flexible & customisable lists (eg. enumerate/itemize, etc.)				
+\usepackage{paralist}				
+
+% adds environment for commenting out blocks of text & for better verbatim
+\usepackage{verbatim}				
 
 
 
-
-\usepackage{booktabs}				 % for much better looking tables
-\usepackage{array} 				% for better arrays (eg matrices) in maths
-\usepackage{paralist}				 % very flexible & customisable lists (eg. enumerate/itemize, etc.)
-\usepackage{verbatim}				% adds environment for commenting out blocks of text & for better verbatim
-
- 
-\geometry{a4paper}			%define A4 Paper
-\geometry{margin=2in} 			% for example, change the margins to 2 inches all round
+%----------------------------------------------------------------------------------------
+%	HEADER / FOOTER  DEFINITIONS
+%----------------------------------------------------------------------------------------
 
 
 
-%%% HEADERS & FOOTERS
-\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
-\pagestyle{fancy} % options: empty , plain , fancy
-\renewcommand{\headrulewidth}{0pt} % customise the layout...
-\lhead{}\chead{}\rhead{}
+ % This should be set AFTER setting up the page geometry
+\usepackage{fancyhdr}
+
+ % options: empty , plain , fancy
+\pagestyle{fancy}
+
+% use this for default header style
+%\pagestyle{headings}	
+
+
+%make chapter and section marks to lowercase
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+
+ % customise the layout...
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\thechapter - \thesection}\chead{}\rhead{\rightmark}
 \lfoot{}\cfoot{\thepage}\rfoot{}
 
-%%% SECTION TITLE APPEARANCE
-\usepackage{sectsty}
-\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
-% (This matches ConTeXt defaults)
 
-%%% ToC (table of contents) APPEARANCE
+%----------------------------------------------------------------------------------------
+%	SECTION TITLE APPEARANCE
+%----------------------------------------------------------------------------------------
+
+\usepackage{sectsty}
+
+ % (See the fntguide.pdf for font help)
+\allsectionsfont{\sffamily\mdseries\upshape}
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENT APPEARANCE
+%----------------------------------------------------------------------------------------
+
 %\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
 \usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
 \renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
@@ -124,6 +220,9 @@ Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris
 \chapter[Chapter Name]{Introduction}
 
 Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
+
+
+\newpage
 
 \section[Section Name]{First Section}
 

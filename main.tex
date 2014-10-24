@@ -1,10 +1,33 @@
 % !TEX TS-program = pdflatex
 % !TEX encoding = UTF-8 Unicode
-
+%---------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2014 Jan Küster, info@jankuester.com
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%	
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%	
+%
+%--------------------------------------------------------------------------------------------------------%
 
 %============================================================================%
 %
+%
 %	DOCUMENMT DEFINITION
+%
 %
 %============================================================================%
 
@@ -28,14 +51,14 @@
 \definecolor{citationscol}{rgb}{0.1,0.1,0.5}
 
 %urls color
-\definecolor{urlscol}{rgb}{0.4,0.4,0.5}
+\definecolor{urlscol}{RGB}{220,120,0}
 
 %internal references color
 \definecolor{linkscol}{rgb}{0.2,0.2,0.3}
 
 
 %----------------------------------------------------------------------------------------
-%	REFERENCES URLS CITATION STYLES AND SO ON
+%	REFERENCES URL CITATION STYLES AND SO ON
 %----------------------------------------------------------------------------------------
 
 %apply reference color definitions to hyperref package
@@ -60,21 +83,24 @@
 % Change line spacing here, Palatino benefits from a slight increase by default
 \linespread{1.05} 
 
-
+% more font size definitions
+\usepackage{moresize}
 
 %----------------------------------------------------------------------------------------
 %	GEOMETRY  DEFINITIONS
 %----------------------------------------------------------------------------------------
 
 %define page styles using geometry
-\usepackage{geometry}
+\usepackage[inner=4cm,outer=2cm,bottom=3.5cm]{geometry}
 
  %define A4 Paper
-\geometry{a4paper}			
+\geometry{a4paper}	
 
-% for example, change the margins to 2 inches all round
-\geometry{margin=2.5cm} 	
+\setlength{\oddsidemargin}{15.5pt}
+\setlength{\evensidemargin}{15.5pt}
 
+\setlength{\parindent}{4mm}
+\setlength{\parskip}{1mm }
 
 %----------------------------------------------------------------------------------------
 %	GRAPHICS  DEFINITIONS
@@ -99,38 +125,45 @@
 %----------------------------------------------------------------------------------------
 
 
- % very flexible & customisable lists (eg. enumerate/itemize, etc.)				
+ % very flexible & customisable lists
+%(eg. enumerate/itemize, etc.)				
 \usepackage{paralist}				
 
-% adds environment for commenting out blocks of text & for better verbatim
+% adds environment for commenting
+% out blocks of text & for better verbatim
 \usepackage{verbatim}				
 
-
+%----------------------------------------------------------------------------------------
+% CUSTOM STRUT FOR EMPTY BOXES
+%----------------------------------------- -----------------------------------------------
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
 
 %----------------------------------------------------------------------------------------
 %	HEADER / FOOTER  DEFINITIONS
 %----------------------------------------------------------------------------------------
 
-
-
  % This should be set AFTER setting up the page geometry
 \usepackage{fancyhdr}
 
- % options: empty , plain , fancy
-\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]
+{
+  \markboth{#1}{}
+}
 
-% use this for default header style
-%\pagestyle{headings}	
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
+\lhead{\sffamily\textcolor{urlscol}{Chapter \thechapter: \leftmark}}
+\rhead{\sffamily\textcolor{urlscol}{\rightmark}}
+\fancyhf[FLE,FRO]{\sffamily\large\thepage}
+\cfoot{}
 
-%make chapter and section marks to lowercase
-\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
-\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
-
- % customise the layout...
-\renewcommand{\headrulewidth}{0pt}
-\lhead{\thechapter - \thesection}\chead{}\rhead{\rightmark}
-\lfoot{}\cfoot{\thepage}\rfoot{}
+%override plain page style
+\fancypagestyle{plain}{ %
+  \fancyhf{} % remove everything
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \renewcommand{\footrulewidth}{0pt}
+  \cfoot{\sffamily\large\thepage}
+}
 
 
 %----------------------------------------------------------------------------------------
@@ -142,6 +175,24 @@
  % (See the fntguide.pdf for font help)
 \allsectionsfont{\sffamily\mdseries\upshape}
 
+\usepackage[explicit]{titlesec}
+
+\titleformat{\section}{\LARGE\bf\sffamily}
+{\textcolor{urlscol}{\thesection \hspace{12pt} #1}}{0pt}{}
+
+\titleformat{\chapter}{\HUGE\bf\sffamily}
+{
+	\hspace{-0.25\linewidth}\colorbox{urlscol}
+	{
+		\makebox[1\linewidth][c]
+		{
+			\textcolor{white}{\HUGE \thechapter \hspace{18pt}#1}
+		} 
+	}
+}
+{0pt}{}
+
+\titleformat{\subsection}{\large\bf\sffamily}{\textcolor{urlscol}{#1}}{0pt}{}
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENT APPEARANCE
@@ -151,9 +202,6 @@
 \usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
 \renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
 \renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
-
-
-
 
 \renewcommand{\abstractname}{Executive Summary} 		%switches abstract to executive summary
 
@@ -169,13 +217,13 @@
 
 
 
-\title{\textbf{The Master Thesis Title}}
+\title{\HUGE\textbf{The Master Thesis Title}}
 \vspace{50pt} % Some vertical space between the title and author name
-\author{\textsc{The Author}\\
+\author{	\vspace{20pt}The Author\\
 	Dept of LaTex\\
 	Tex University\\
 	Textown, Texland\\
-	\texttt{mail@texuni.com}}
+	mail@texuni.com}
 \vspace{40pt} % Some vertical space between the title and author name
 \date{\today}
 
@@ -206,25 +254,48 @@
 
 
 \begin{document}
+
+% before the chapters start, we 
+% use roman numbering on the pages
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+ % Print the title section
 \maketitle
+\vspace{30pt} % Some vertical space between the abstract and first section
+\cleardoublepage
+
+%table of contents
 \tableofcontents
-\newpage
+\cleardoublepage
 
-
+% EXECUTIVE SUMMARY
+\pagestyle{empty}
 \begin{abstract}
 Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
 \end{abstract}
+\cleardoublepage
 
-\newpage
+% Back to arabic numbering
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\pagestyle{fancy}
 
-\chapter[Chapter Name]{Introduction}
+
+%============================================================================%
+%
+%	CHAPTER 1
+%
+%============================================================================%
+
+\chapter[Introduction]{Introduction}
 
 Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
 
 
 \newpage
 
-\section[Section Name]{First Section}
+\section[1st Section Name]{First Section}
 
 Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
 
@@ -235,13 +306,30 @@ Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris
 	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
 \end{itemize}
 
-\subsection[Subsection Name]{A subsection}
+\subsection[1st Subsection Name]{A subsection}
 
 Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
 
 More text. More text. More text. \index{more here} More text. More text. More text. More text. More text. More text. 
 
+\cleardoublepage
 
+\section[2nd Section Name]{Second Section}
+
+Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
+
+\begin{itemize}
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+	\item Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. 
+\end{itemize}
+
+\subsection[1st Subsection Name]{A subsection}
+
+Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
+
+More text. More text. More text. \index{more here} More text. More text. More text. More text. More text. More text. 
 
 %============================================================================%
 %
@@ -250,6 +338,9 @@ More text. More text. More text. \index{more here} More text. More text. More te
 %============================================================================%
 
 \cleardoublepage
+
+\pagestyle{plain}
+
 \phantomsection %hyperref package support
 \addcontentsline{toc}{chapter}{Appendix}
 {\textbf{\LARGE{Appendix}}}\\ %headline

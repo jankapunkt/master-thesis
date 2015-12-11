@@ -1,0 +1,149 @@
+%============================================================================%
+%
+%
+%	DOCUMENMT DEFINITION
+%
+%
+%============================================================================%
+
+% we use report class for thesis design
+% 11pt font is way bettern to read than 12pt
+% we want to make a title page
+% two side allows us to make the page layout align by even and odd
+% openright tells the compiler that the first page is a right page
+\documentclass[pdftex,11pt,titlepage,twoside,openright]{report}	
+
+
+%----------------------------------------------------------------------------------------
+%	ENCODING
+%----------------------------------------------------------------------------------------
+
+% for suporting multi platform
+\usepackage[utf8x]{inputenc} 	
+
+% natbib is what you want for bibliography
+\usepackage[square,authoryear]{natbib}
+
+
+%----------------------------------------------------------------------------------------
+%	ALL DECLARATIONS
+%----------------------------------------------------------------------------------------
+
+% here are all our declarations 
+\input{./includes/declarations.tex}
+
+
+%----------------------------------------------------------------------------------------
+%	MAKE INDEX AND GLOSSARY
+%----------------------------------------------------------------------------------------
+
+
+\usepackage[style=long,nonumberlist,toc,xindy,acronym,nomain]{glossaries} % nomain, if you define glossaries in a file, and you use \include{INP-00-glossary}
+%\loadglsentries[main]{glossary}
+% or using \input:
+\include{glossary}
+\makeglossaries
+\usepackage{makeidx}
+\makeindex
+
+
+
+%============================================================================%
+%
+%	BEGIN DOCUMENT
+%
+%============================================================================%
+
+
+\begin{document}
+
+% before the chapters start, we use roman numbering on the pages
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+% print title
+\input{./includes/title.tex}
+
+%pagestyle after title
+\pagestyle{fancy}
+
+% let's print the table of content, 
+% the list of figures and the list of tables
+\setcounter{tocdepth}{1}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\cleardoublepage
+
+% EXECUTIVE SUMMARY
+% here we describe roughly what this work is about
+
+\begin{abstract}
+
+This work is intended for all those, who want to start writing immediately. For those who aim to avoid the procedure, I went through - all night long figuring out what packages to include. Finding the right syntax to make the intended layout to work. Debugging all those micro errors which may appear. Getting the bibliography to work. And then finally include the citations into the newly written text. By providing this 'out of the box' template, I hope to make things easier for you and to make you start your thesis without hesitation. You should focus on the content your work and not on it's layout because this may stop you from starting to write.\\
+This work backs all the topics you need, to get started with your thesis immediately. You may just copy some of the code examples here, which is fine. If you want to create a thesis with your own taste of style, you should dig deeper into the functionality of the packages. The packages and features are focused for work in the field of computer science and include tables, pseudo code, syntax highlighting, mathematical equations and more.
+
+\end{abstract}
+
+% Back to arabic numbering
+
+\pagestyle{fancy}
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+%============================================================================%
+%
+%	CHAPTER 1
+%
+%============================================================================%
+
+\chapter{General Tools and Techniques for Your Master Thesis}
+
+% before the chapter starts, we can write some overview 
+% this is good to summarize quickly what this chapter covers
+At this point it may be good for the reader to get an overview about this chapter. What does it cover? What is it's purpose in the bigger picture of your thesis? It is like a micro-abstract and it helps your audience to keep on track. This is especially useful, when your thesis is an interdisciplinary work.
+
+
+
+\newpage
+\input{./includes/chapter1.tex}
+
+
+
+%============================================================================%
+%
+%	CHAPTER 2
+%
+%============================================================================%
+\cleardoublepage
+\chapter{Specific Tools for a Thesis in Computer Science}
+
+This chapter covers more specific examples, which are useful in the field of computer sciences.
+
+\newpage
+\input{./includes/chapter2.tex}
+
+%============================================================================%
+%
+%	BIBLIOGRAPHY
+%
+%============================================================================%
+
+\cleardoublepage
+\phantomsection %hyperref package support
+\addcontentsline{toc}{chapter}{Bibliography} % add entry to table of contents
+\pagestyle{plain}
+
+
+%{\textbf{\LARGE{Bibliography}}}\\	%headline
+%\nocitep{*} % Show all Bib-entries (DEBUG)
+
+\bibliographystyle{abbrvnat}
+\bibliography{bib/algorithm.bib,bib/resDes.bib} % for a better structure you can split your bib items into seperate files
+
+
+
+\end{document}

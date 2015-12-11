@@ -1,0 +1,288 @@
+%----------------------------------------------------------------------------------------
+%	COLOR DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% we use the xtended color package
+\usepackage[table,usenames,dvipsnames]{xcolor}
+
+% citation reference color
+\definecolor{CITATION_COL}{RGB}{121,0,226}
+
+% urls color
+\definecolor{SECTION_COL}{RGB}{0, 117,226}
+
+% internal references color
+\definecolor{LINK_COL}{rgb}{0,0,0}
+
+% main color
+\definecolor{MAIN_COL}{RGB}{0, 117,226}
+% code highlight color
+\definecolor{CODE_COL}{rgb}{0.8,0.8,0.8}
+
+% some black fallback
+\definecolor{DEF_COL}{RGB}{226,109,0}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES URL CITATION STYLES AND SO ON
+%----------------------------------------------------------------------------------------
+
+% apply color definitions to hyperref package
+\usepackage[colorlinks=true,citecolor=CITATION_COL,urlcolor=SECTION_COL,linkcolor=LINK_COL]{hyperref}
+
+% make urls directly open the browser onclick
+\usepackage{url}
+\urlstyle{same}
+
+
+%----------------------------------------------------------------------------------------
+%	FONT DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% better typography rendering scheme
+\usepackage[protrusion=true,expansion=true]{microtype} 
+
+ % we use the standard Times font
+\usepackage{pslatex}
+
+ % required for accented characters
+\usepackage[T1]{fontenc}
+
+% change line spacing here, readability 
+% benefits from a slight increase by default
+\linespread{1.25} 
+
+% allows more font size definitions
+\usepackage{moresize}
+
+%----------------------------------------------------------------------------------------
+%	GEOMETRY  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% define page styles using geometry
+\usepackage[bottom=3cm,marginparwidth=1.5cm, marginparsep=0.5cm]{geometry}
+
+ %define A4 Paper
+\geometry{a4paper}	
+
+% define margins for even and odd pages
+\setlength{\oddsidemargin}{15.5pt}
+\setlength{\evensidemargin}{15.5pt}
+
+% paragraph indent and skip
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{1mm }
+
+% short command for colorizing a text as a note
+% not used within this thesis anymore
+\newcommand{\NOTE}[1]{\textit{\textcolor{DEF_COL}{#1}}}
+	%\marginpar{\sffamily \MakeUppercase{\tiny{{#1}}}}
+
+
+%----------------------------------------------------------------------------------------
+%	GRAPHICS  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% required for including pictures
+\usepackage[pdftex]{graphicx}
+
+ % make it possible to include more than one captioned figure/table in a single float 
+\usepackage{subfig}
+
+% make it possible to control text
+% positioning around figures
+\usepackage{wrapfig}
+
+ % for much better looking tables
+\usepackage{booktabs}	
+
+% for better arrays (eg matrices) in maths		
+\usepackage{array} 
+
+
+%----------------------------------------------------------------------------------------
+%	ENVIRONMENT  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+ % very flexible & customisable lists
+%(eg. enumerate/itemize, etc.)				
+\usepackage{paralist}				
+
+% adds environment for commenting
+% out blocks of text & for better verbatim
+\usepackage{verbatim}				
+
+% allows multiple rows to be merged to one row
+\usepackage{multirow}
+
+%----------------------------------------------------------------------------------------
+% CUSTOM STRUT FOR EMPTY BOXES
+%----------------------------------------- -----------------------------------------------
+
+% when boxes become a pain this might help
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
+
+%----------------------------------------------------------------------------------------
+%	HEADER / FOOTER  DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+% header definitions package
+ % this should be set AFTER setting up the page geometry
+\usepackage{fancyhdr}
+
+% we want to shorten the display of the chapter in the header
+\renewcommand{\chaptermark}[1]
+{
+  \markboth{#1}{}
+}
+
+% but we want to show extended info of the current section
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+% we can even manipulate the font family
+%\lhead{\sffamily Chapter \thechapter}
+
+% this defines, what content should be displayed in header and footer
+% and on which side (left-right) as well as on even and odd pages
+\fancyhf[FLE,FRO]{}
+\fancyhf[HLE,HRO]{\colorbox{MAIN_COL}{\sffamily\LARGE\textcolor{white}{\thepage}}}
+\fancyhf[HRE,HLO]{\sffamily \textcolor{MAIN_COL}{\leftmark}}
+\cfoot{}
+
+%override plain page style for plain pages
+\fancypagestyle{plain}{ %
+  \fancyhf{} % remove everything
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyhf[HLE,HRO]{\colorbox{MAIN_COL}{\sffamily\large\textcolor{white}{\thepage}}}
+  \cfoot{}
+}
+
+%----------------------------------------------------------------------------------------
+%	SECTION TITLE APPEARANCE
+%----------------------------------------------------------------------------------------
+
+% we want to customize our section title 
+% to make it look more appealing
+\usepackage{sectsty}
+
+% for dimensioning and other math stuff
+\usepackage{amsmath}
+
+% modify bg colors
+\usepackage[some]{background}
+
+% draw custom graphics progammatically
+\usepackage{tikz}				
+\usetikzlibrary{shapes, backgrounds,mindmap, trees}
+
+% this is our custom section page layout
+\newcommand{\SECTBOX}[1]
+{
+	\begin{tikzpicture}[remember picture,overlay]
+ 		\path [fill=MAIN_COL] (current page.west)rectangle (current page.north east); 
+	\end{tikzpicture}
+}
+
+% this is our custom title page layout
+\newcommand{\TITLEBOX}
+{
+	\begin{tikzpicture}[remember picture,overlay]
+ 		\path [fill=MAIN_COL] (current page.north west) rectangle (25.0,-3.5); 
+	\end{tikzpicture}
+}
+
+
+ % (See the fntguide.pdf for font help)
+\allsectionsfont{\sffamily\mdseries\upshape}
+
+% for customizing the title page
+\usepackage[explicit]{titlesec}
+
+% font and color def for section
+\titleformat{\section}{\LARGE\sffamily}{\textcolor{LINK_COL}{\thesection \hspace{12pt} #1}}{0pt}{}
+
+% font and color def for subsection
+\titleformat{\subsection}{\large\bf\sffamily}{\textcolor{SECTION_COL}{\thesubsection \hspace{12pt} #1}}{0pt}{}
+
+% note: remove \thesection or \thesubsection to leave out the 
+% numbering at the start of the section / subsection headline
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENT APPEARANCE
+%----------------------------------------------------------------------------------------
+
+% deprecated
+%\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+
+% Alter the style of the Table of Contents
+%\usepackage[titles,subfigure]{tocloft}
+
+%\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+
+%\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+% renames abstract to executive summary
+\renewcommand{\abstractname}{Executive Summary} 		
+
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM HRULE
+%----------------------------------------------------------------------------------------
+
+% a custom horizontal rule / line
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\ThinHRule}{\textcolor{CODE_COL}{\rule{0.5\linewidth}{0.05mm}}}
+
+
+%----------------------------------------------------------------------------------------
+%	ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+
+% extended listin options
+% can be used for code display
+\usepackage{listings}
+
+% syntax highlight def for listings
+\lstset{ %
+  	backgroundcolor=\color{CODE_COL},
+	language=C,
+	breaklines=true
+}
+
+% allows us to define pseudocode algorithms
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+% extended table definitions
+\usepackage{tabularx}
+
+% include external pdf pages
+\usepackage{pdfpages}
+\usepackage{float}
+
+
+%----------------------------------------------------------------------------------------
+%	Code Syntax Highlight Formatting
+%----------------------------------------------------------------------------------------
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment= [s]{<!}{->},
+  stringstyle=\color{black},
+  identifierstyle=\color{blue},
+  keywordstyle=\color{orange},
+  morekeywords={xmlns, pattern,type, cells, count, required} % list your attributes here which may be highlighted
+}
+
+
+

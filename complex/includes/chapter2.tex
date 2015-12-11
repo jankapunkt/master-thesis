@@ -1,0 +1,117 @@
+\section{Writing Pseudo Code in LaTex}
+
+
+The package \NOTE{algorithm2e} allows you write nearly all imaginable code structures as pseudo code in LaTex. A referece of commands can be found here: \url{http://www.cs.toronto.edu/~frank/Useful/algorithm2e.pdf}. Do not forget to wrap the pseudo code into a figure, thus it will be included into list of figures.\\
+
+The following example demonstrates the package with a bubble sort algorithm. Note, that the directive \NOTE{repeat - until} is the same as the \NOTE{do-while} directive.
+
+\begin{figure}[H]
+\begin{algorithm}[H]
+\KwData{A as Array to sort,}
+\KwResult{A as sorted Array} 
+
+int n $\leftarrow$ A.size \tcp*[l]{cache the initial size of A}
+
+
+\Repeat{n>1}{
+	int newn $\leftarrow$ 1
+	\For{int i=0; i<n-1; i++}
+	{
+		\If{A[i] > A[i+1]}
+		{
+			A.swap(i, +1);
+		}
+	}
+	n  $\leftarrow$ newn
+}
+
+return A
+\caption{bubbleSort(Array A)}
+\end{algorithm}
+\caption[BubbleSort Algorithm Pseudocoe]{PseudoCode f the BubbleSort Algorithm, derived from \url{https://de.wikipedia.org/wiki/Bubblesort}.}
+\end{figure}
+
+
+\newpage
+\section{Mathematical Equations}
+
+Writing mathematical equations can be a very important part of your work. This applies especially, if you want to analyze and evaluate your gathered data. The following example shows a calculation of Kohen's Cappa, a measurement which represents the inter coder reliability in coding qualitative data.\\
+
+Let's assume the following results of coding a text by two different persons:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+result XY & \multicolumn{6}{c|}{Rater A}\\\hline
+ \multirow{6}{*}{Rater B}& & \textbf{9} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{c(a) }\\\cline{2-7}
+ & \textbf{9}& 27	&0&	0	&0 & 0.5510204082\\\cline{2-7}
+&\textbf{0}	&0	&6	&0	&0&0.1224489796\\\cline{2-7}
+&\textbf{1}	&0	&1	&7	&0&0.1632653061\\\cline{2-7}
+&\textbf{2}	&0	&1	&7	&0&0.1632653061\\\cline{2-7}
+&\textbf{c(r)} & 0.5510204082 & 0.1632653061 & 0.2857142857 & 0& n=49\\\hline
+
+\end{tabular}
+\caption[Example data for mathematical equations]{A set of example data for further use in a mathematical equation.  }
+\end{center}
+\end{table}
+
+Continuing from this basis, the calculation can be proceeded with Cohen's Kappa defined as
+
+\begin{center}
+$k=\frac{Pr(a) - Pr(e)}{1 - Pr(e)}$
+\end{center}
+
+Where $Pr(a)$ is the actual observed agreement of the codes and $Pr(e)$ is the estimated agreement of the codes. The actual agreement can be calculated by building the sum of those codes, which have been assigned by both raters (in the table: diagonal from upper left to lower right). This sum is then divided by the amount of responses (n), which is expressed by the following calculation as 
+
+\begin{center}
+$Pr(a) = ( 27 + 6 + 7 + 0 ) / 49 = 0.8163265306$
+\end{center}
+
+The estimated agreement is calculated out of the percentages of each code in relation to the amount of responses (n). The overall estimated agreement is then built by multiplying these chances and summing up their results. The term is described as
+
+\begin{center}
+$Pr(e) = \displaystyle\sum_{i=1}^{m} c(r)_i \times c(a)_i $
+\end{center}
+
+where m is the number of all occurring codes, i is the current code and c(r) and c(a) are the chances of assigned codes (see table) for raters and auto. Applying this term is leading to:
+
+
+\begin{center}
+$Pr(e) =  (0.5510204082 \times 0.5510204082) + (0,1632653061 \times 0.1224489796) + (0.285714285 \times 0.1632653061) + (0 \times 0) = 0.3702623907$
+\end{center}
+
+The values for Pr(a) and Pr(e) are calculated and can be included into the kappa equation, resulting in the following kappa for item a2s1i1a:
+
+\begin{center}
+ $k=\frac{0.8163265306 -0.3702623907}{1 - 0.3702623907} = 0.7083333333$
+\end{center}
+
+
+\section{Including Code into Your Text}
+
+Sometimes you want to include text which include characters that could trigger commands. At this point it useful to wrap them into the \NOTE{verbatim} environment. The text is uninterpreted and listet as is.
+
+\scriptsize
+\begin{verbatim}
+2015_5_13/23-19-33:550: ************* LOG INFO  *************
+2015_5_13/23-19-33:550: name: user1
+2015_5_13/23-19-33:550: [0]: 534
+2015_5_13/23-19-33:550: [1]: 321
+2015_5_13/23-19-33:550: [2]: 094832
+2015_5_13/23-19-33:550: [3]: 3980429804
+\end{verbatim}
+\normalsize	
+
+
+You can also include existing code and highlight it's syntax, using the \NOTE{lstlisting} package. Look at the declarations.tex file for listings settings. The following example highlights xml syntax by given keywords.
+
+\small
+\begin{lstlisting}[keywordstyle=\color{blue},language=XML]
+<!-- an XML comment -->
+<entry type="normal" pattern="a" />
+<entry type="normal" pattern="b" />
+<entry type="formula" pattern="t=a+b+c" required="1"/>
+\end{lstlisting}
+\normalsize	
+

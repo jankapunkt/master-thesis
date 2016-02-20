@@ -1,7 +1,7 @@
-master-thesis
+Master Thesis LaTex Template
 ============
 
-A simple collection of templates for a master thesis. Can also be used for other forms of written work.
+A collection of templates for a master thesis. Can also be used for other forms of written work.
 
 Licence
 ======
